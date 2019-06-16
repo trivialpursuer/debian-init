@@ -19,28 +19,28 @@ dontrun() {
 sudo apt update
 sudo apt-get install -y -f
 sudo apt install -y \
-	gcc pkg-config automake nasm		\
-	git repo lib32stdc++6 bison flex 	\
-	autoconf autopoint libtool cmake 	\
-	libltdl-dev gawk libssl-dev python-dev 	\
-	python-numpy python-pathlib lsof	\
-	python-crypto python-pip mtd-utils	\
-	dos2unix liblz4-tool openssl git-lfs	\
-	p7zip filezilla zsh python-protobuf	\
-	tmux tftpd-hpa valgrind wireshark	\
-	protobuf-c-compiler nmap screen	tftp 	\
-	default-jdk awscli fastboot snapd	\
-	libgconf-2-4 libxss1 libappindicator1	\
-	python3-dev python3-pip	openocd		\
-	python3-setuptools exuberant-ctags  \
+    gcc pkg-config automake nasm            \
+    git repo lib32stdc++6 bison flex        \
+    autoconf autopoint libtool cmake        \
+    libltdl-dev gawk libssl-dev python-dev  \
+    python-numpy python-pathlib lsof        \
+    python-crypto python-pip mtd-utils      \
+    dos2unix liblz4-tool openssl git-lfs    \
+    p7zip filezilla zsh python-protobuf     \
+    tmux tftpd-hpa valgrind wireshark       \
+    protobuf-c-compiler nmap screen tftp    \
+    default-jdk awscli fastboot snapd       \
+    libgconf-2-4 libxss1 libappindicator1   \
+    python3-dev python3-pip openocd         \
+    python3-setuptools exuberant-ctags      \
     build-essential libclang-dev
-	
+    
 #Conversion utility from Python2->Python3
 pip3 install future
 
 #Keybase 
 curl -o ${DEBS_DIR}/keybase_amd64.deb --remote-name \
-	https://prerelease.keybase.io/keybase_amd64.deb
+    https://prerelease.keybase.io/keybase_amd64.deb
 sudo dpkg -i ${DEBS_DIR}/keybase_amd64.deb
 sudo apt-get install -f
 
@@ -70,16 +70,16 @@ mkdir -p ${GIT_DIR}
 
 #Thefuck
 if ! [ -d ${GIT_DIR}/thefuck ]; then
-	git clone https://github.com/nvbn/thefuck ${GIT_DIR}/thefuck
+    git clone https://github.com/nvbn/thefuck ${GIT_DIR}/thefuck
 fi
 sudo pip3 install ${GIT_DIR}/thefuck
 
 #Picocom
 if ! [ -d ${GIT_DIR}/picocom ]; then
-	git clone https://github.com/npat-efault/picocom ${GIT_DIR}/picocom
+    git clone https://github.com/npat-efault/picocom ${GIT_DIR}/picocom
 fi
 make -C ${GIT_DIR}/picocom && cp ${GIT_DIR}/picocom/picocom ~/.local/bin && \
-	cp ${GIT_DIR}/picocom/picocom.1 ~/.local/man/man1
+    cp ${GIT_DIR}/picocom/picocom.1 ~/.local/man/man1
 
 
 }
@@ -150,4 +150,4 @@ set -e
 #Generate ssh key. RSA, no password
 ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
 
-
+#TODO: Git configuration
