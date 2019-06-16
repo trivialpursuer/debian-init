@@ -4,6 +4,10 @@ set -e
 #Grab directory that this script exists in
 INIT_DIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
 
+#Create a directory for storing packages.
+DEBS_DIR=~/Downloads/debs
+mkdir -p ${DEBS_DIR}
+
 #Do I have root access?
 
 
@@ -27,12 +31,12 @@ sudo apt install -y \
 	protobuf-c-compiler nmap screen	tftp 	\
 	default-jdk awscli fastboot snapd	\
 	libgconf-2-4 libxss1 libappindicator1	\
-	python3-dev python3-pip			\
-	python3-setuptools exuberant-ctags
+	python3-dev python3-pip	openocd		\
+	python3-setuptools exuberant-ctags  \
+    build-essential libclang-dev
 	
-#Create a directory for storing packages.
-DEBS_DIR=~/Downloads/debs
-mkdir -p ${DEBS_DIR}
+#Conversion utility from Python2->Python3
+pip3 install future
 
 #Keybase 
 curl -o ${DEBS_DIR}/keybase_amd64.deb --remote-name \
@@ -41,7 +45,7 @@ sudo dpkg -i ${DEBS_DIR}/keybase_amd64.deb
 sudo apt-get install -f
 
 #Snap may have already installed the following applications. If so, we do not
-#wish to abort the script.
+#   wish to abort the script.
 set +e
 
 #Slack
@@ -79,6 +83,8 @@ make -C ${GIT_DIR}/picocom && cp ${GIT_DIR}/picocom/picocom ~/.local/bin && \
 
 
 }
+
+
 ####################### My Shell and homedir configuration #####################
 
 #Configure my preferred shell (zsh)
@@ -93,27 +99,40 @@ cp ${INIT_DIR}/.zshrc ~
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
+#SEGGER J-Link GDB Server: FIXME Segger does not offer a headless download of
+#   this package. It must be installed manually.
+#curl -o ${DEBS_DIR}/JLink_Linux_x86_64.deb --remote-name \
+#   https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb
+#sudo dpkg -i ${DEBS_DIR}/JLink_Linux_x86_64.deb
+
+
 ################################# Vim Config ###################################
 
 #Install Pathogen
-mkdir -p ~/.vim/autoload ~/.vim/bundle ~/.vim/colors && \
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 #My custom vim config file
 cp ${INIT_DIR}/.vimrc ~
 
-#Colorscheme file
-cp ${INIT_DIR}/jellybeans.vim ~/.vim/colors
-
 #Plugins may have already installed the following applications. If so, we do not
-#wish to abort the script.
+#   wish to abort the script.
 set +e
+
+#Colorscheme file
+git clone https://github.com/nanotech/jellybeans.vim ~/.vim/bundle/jellybeans.vim
+cp ~/.vim/bundle/jellybeans.vim/colors ~/.vim/
 
 #Gundo
 git clone https://github.com/sjl/gundo.vim ~/.vim/bundle/gundo
 
 #NERDTree
 git clone https://github.com/scrooloose/nerdtree ~/.vim/bundle/nerdtree
+
+#YouCompleteMe
+git clone --recurse-submodules https://github.com/Valloric/YouCompleteMe    \
+    ~/.vim/bundle/YouCompleteMe
+python3 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 #Fugitive
 git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
@@ -123,3 +142,11 @@ vim -u NONE -c "helptags vim-fugitive/doc" -c q
 git clone https://github.com/majutsushi/tagbar.git ~/.vim/bundle/tagbar
 
 set -e
+
+
+################################ Misc Config ###################################
+
+#Generate ssh key. RSA, no password
+ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
+
+

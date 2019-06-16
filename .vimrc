@@ -26,7 +26,7 @@ syntax enable
 
 " Color scheme. 
 set background=dark            	"First set background to dark.
-colorscheme jellybeans		" Finally, choose solarized
+colorscheme jellybeans		    "Finally, choose the only colorscheme that matters
 
 " Tabs/Spaces
 set tabstop=4		" number of visual spaces per TAB when reading in a file
