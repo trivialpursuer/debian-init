@@ -120,8 +120,9 @@ cp ${INIT_DIR}/.vimrc ~
 set +e
 
 #Colorscheme file
-git clone https://github.com/nanotech/jellybeans.vim ~/.vim/bundle/jellybeans.vim
-cp ~/.vim/bundle/jellybeans.vim/colors ~/.vim/
+git clone https://github.com/nanotech/jellybeans.vim \
+    ~/.vim/bundle/jellybeans.vim
+cp -R ~/.vim/bundle/jellybeans.vim/colors ~/.vim/
 
 #Gundo
 git clone https://github.com/sjl/gundo.vim ~/.vim/bundle/gundo
