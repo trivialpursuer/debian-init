@@ -156,7 +156,7 @@ set -e
 #gpg --full-gen-key
 
 #Git configuration
-rm ~/.gitconfig
+rm ~/.gitconfig ~/.git-commit.txt
 ln -s ${INIT_DIR}/.gitconfig ~/.gitconfig
 ln -s ${INIT_DIR}/.git-commit.txt ~/.git-commit.txt
 
