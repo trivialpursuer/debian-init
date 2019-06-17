@@ -1,6 +1,7 @@
 [user]
     name = Trevor Phillips
     email = trivialpursuer0@gmail.com
+    signingkey = AC37B285C74C8625
 [core]
     editor = vim
 [color "decorate"]
@@ -24,3 +25,5 @@
     prompt = false
 [commit]
     template = ~/.git-commit.txt
+    gpgsign = false
+

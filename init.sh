@@ -152,7 +152,10 @@ set -e
 ################################ Misc Config ###################################
 
 #Generate ssh key. RSA, no password
-ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
+#ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
+
+#Generate GPG key
+#gpg --full-gen-key
 
 #Git configuration
 rm ~/.gitconfig

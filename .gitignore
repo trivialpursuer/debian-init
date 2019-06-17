@@ -1,7 +1,8 @@
 # Development environment-specific files
 *~
-*.swp
+*.swn
 *.swo
+*.swp
 *.orig
 
 # Byte-compiled / optimized / DLL files
