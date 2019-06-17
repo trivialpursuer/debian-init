@@ -157,3 +157,5 @@ ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
 #Git configuration
 rm ~/.gitconfig
 ln -s ${INIT_DIR}/.gitconfig ~/.gitconfig
+ln -s ${INIT_DIR}/.git-commit.txt ~/.git-commit.txt
+

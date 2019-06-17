@@ -123,3 +123,7 @@ export SWT_GTK3=0
 
 #VIM Key bindings
 bindkey -v
+
+#Less configuration (4-space tabstop)
+export LESS=-Rx4
+
