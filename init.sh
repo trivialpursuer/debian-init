@@ -13,8 +13,6 @@ mkdir -p ${DEBS_DIR}
 
 ################### Packages, libraries, and applications ######################
 
-dontrun() {
-
 #First thing first, install all standard packages I use.
 sudo apt update
 sudo apt-get install -y -f
@@ -82,22 +80,23 @@ make -C ${GIT_DIR}/picocom && cp ${GIT_DIR}/picocom/picocom ~/.local/bin && \
     cp ${GIT_DIR}/picocom/picocom.1 ~/.local/man/man1
 
 
-}
-
-
 ####################### My Shell and homedir configuration #####################
 
 #Configure my preferred shell (zsh)
-OH_MY_ZSH_URL=\
-https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-cd && RUNZSH=no sh -c "$(curl -fsSL $OH_MY_ZSH_URL)"
+if ! [ -d ~/.oh-my-zsh ]; then
+    OH_MY_ZSH_URL=\
+    https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    cd && RUNZSH=no sh -c "$(curl -fsSL $OH_MY_ZSH_URL)"
+fi
 
 #Copy my custom .zshrc
 cp ${INIT_DIR}/.zshrc ~
 
 #FZF
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+if ! [ -d ~/.fzf ]; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
 
 #SEGGER J-Link GDB Server: FIXME Segger does not offer a headless download of
 #   this package. It must be installed manually.
@@ -129,11 +128,14 @@ git clone https://github.com/sjl/gundo.vim ~/.vim/bundle/gundo
 
 #NERDTree
 git clone https://github.com/scrooloose/nerdtree ~/.vim/bundle/nerdtree
+git clone https://github.com/jistr/vim-nerdtree-tabs.git \
+    ~/.vim/bundle/vim-nerdtree-tabs
 
 #YouCompleteMe
 git clone --recurse-submodules https://github.com/Valloric/YouCompleteMe    \
     ~/.vim/bundle/YouCompleteMe
-python3 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
+python3 ~/.vim/bundle/YouCompleteMe/install.py 
+#FIXME: Having trouble building with --clang-completer flag. Needs triaging.
 
 #Fugitive
 git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
@@ -150,4 +152,6 @@ set -e
 #Generate ssh key. RSA, no password
 ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
 
-#TODO: Git configuration
+#Git configuration
+cp ${INIT_DIR}/.gitconfig ~/
+

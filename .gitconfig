@@ -1,0 +1,13 @@
+[user]
+	name = Trevor Phillips
+[core]
+	editor = vim
+[color "diff"]
+	new = 42 bold
+    old = 166
+[color "status"]
+    added = 42
+    branch = 228
+    changed = 166
+    updated = 42
+    untracked = 166
