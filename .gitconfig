@@ -2,12 +2,22 @@
 	name = Trevor Phillips
 [core]
 	editor = vim
+[color "decorate"]
+    HEAD = 165 bold
+    branch = 228
+    tag = 153
+    remoteBranch = 120 bold
 [color "diff"]
 	new = 42 bold
-    old = 166
+    old = 166 bold
 [color "status"]
     added = 42
-    branch = 228
+    branch = 228 bold
     changed = 166
     updated = 42
     untracked = 166
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+[mergetool]
+    prompt = false

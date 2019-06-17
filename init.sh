@@ -89,8 +89,9 @@ if ! [ -d ~/.oh-my-zsh ]; then
     cd && RUNZSH=no sh -c "$(curl -fsSL $OH_MY_ZSH_URL)"
 fi
 
-#Copy my custom .zshrc
-cp ${INIT_DIR}/.zshrc ~
+#Link to my custom .zshrc
+rm ~/.zshrc
+ln -s ${INIT_DIR}/.zshrc ~/.zshrc
 
 #FZF
 if ! [ -d ~/.fzf ]; then
@@ -112,7 +113,8 @@ mkdir -p ~/.vim/autoload ~/.vim/bundle && \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 #My custom vim config file
-cp ${INIT_DIR}/.vimrc ~
+rm ~/.vimrc
+ln -s ${INIT_DIR}/.vimrc ~/.vimrc
 
 #Plugins may have already installed the following applications. If so, we do not
 #   wish to abort the script.
@@ -121,7 +123,7 @@ set +e
 #Colorscheme file
 git clone https://github.com/nanotech/jellybeans.vim \
     ~/.vim/bundle/jellybeans.vim
-cp -R ~/.vim/bundle/jellybeans.vim/colors ~/.vim/
+ln -s ~/.vim/bundle/jellybeans.vim/colors ~/.vim/colors
 
 #Gundo
 git clone https://github.com/sjl/gundo.vim ~/.vim/bundle/gundo
@@ -153,5 +155,5 @@ set -e
 ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa
 
 #Git configuration
-cp ${INIT_DIR}/.gitconfig ~/
-
+rm ~/.gitconfig
+ln -s ${INIT_DIR}/.gitconfig ~/.gitconfig
