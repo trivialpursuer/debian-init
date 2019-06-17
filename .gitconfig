@@ -1,14 +1,15 @@
 [user]
-	name = Trevor Phillips
+    name = Trevor Phillips
+    email = trivialpursuer0@gmail.com
 [core]
-	editor = vim
+    editor = vim
 [color "decorate"]
     HEAD = 165 bold
     branch = 228
     tag = 153
     remoteBranch = 120 bold
 [color "diff"]
-	new = 42 bold
+    new = 42 bold
     old = 166 bold
 [color "status"]
     added = 42
