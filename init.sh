@@ -8,8 +8,6 @@ INIT_DIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
 DEBS_DIR=~/Downloads/debs
 mkdir -p ${DEBS_DIR}
 
-#Do I have root access?
-
 
 ################### Packages, libraries, and applications ######################
 
