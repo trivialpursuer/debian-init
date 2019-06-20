@@ -29,7 +29,7 @@ sudo apt install -y \
     libgconf-2-4 libxss1 libappindicator1   \
     python3-dev python3-pip openocd         \
     python3-setuptools exuberant-ctags      \
-    build-essential libclang-dev
+    build-essential libclang-dev cpputest   \
     
 #Conversion utility from Python2->Python3
 pip3 install future
